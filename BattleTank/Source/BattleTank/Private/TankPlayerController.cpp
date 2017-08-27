@@ -24,3 +24,18 @@ void ATankPlayerController::BeginPlay()
 		UE_LOG(LogTemp, Error, TEXT("Failed to get the controlled tank"));
 	}
 }
+
+void ATankPlayerController::Tick(float DeltaTime)
+{
+	Super::Tick(DeltaTime);
+	//UE_LOG(LogTemp, Warning, TEXT("Tick Working properly"));
+	AimTowardsCrossHair();
+}
+
+void ATankPlayerController::AimTowardsCrossHair()
+{
+	if (!GetControlledTank())
+	{
+		return;
+	}
+}
