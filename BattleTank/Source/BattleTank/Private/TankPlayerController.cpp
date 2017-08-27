@@ -13,7 +13,7 @@ void ATankPlayerController::BeginPlay()
 {
 	Super::BeginPlay();
 	// auto ControlledTank = GetControlledTank();
-	UE_LOG(LogTemp, Warning, TEXT("PlayerController set"));
+	//UE_LOG(LogTemp, Warning, TEXT("PlayerController set"));
 	
 	if (GetControlledTank())
 	{
