@@ -15,12 +15,17 @@ class BATTLETANK_API ATankPlayerController : public APlayerController
 	GENERATED_BODY()
 	
 public:
+	
 	ATank* GetControlledTank() const;
 
 	void BeginPlay() override;
-
 	virtual void Tick(float DeltaSeconds) override;
 private:
+	UPROPERTY(EditAnywhere)
+	float CrossHairLocationX = 0.5f;
+	UPROPERTY(EditAnywhere)
+	float CrossHairLocationY = 0.3333f;
 	void ATankPlayerController::AimTowardsCrossHair();
-	
+	bool GetSightRayHitLocation(FVector &OutHitLocation) const;
+	bool GetPlayerRotation(FVector2D, FVector &) const;
 };
