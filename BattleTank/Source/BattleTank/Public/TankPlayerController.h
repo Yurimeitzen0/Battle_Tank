@@ -25,7 +25,10 @@ private:
 	float CrossHairLocationX = 0.5f;
 	UPROPERTY(EditAnywhere)
 	float CrossHairLocationY = 0.3333f;
+	UPROPERTY(EditAnywhere)
+	float RaySize = 10000000.0f;
 	void ATankPlayerController::AimTowardsCrossHair();
 	bool GetSightRayHitLocation(FVector &OutHitLocation) const;
 	bool GetPlayerRotation(FVector2D, FVector &) const;
+	bool GetLookVectorHitLocation(FVector LookDirection,FVector &OutHitLocation) const;
 };

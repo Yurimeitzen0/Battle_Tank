@@ -42,7 +42,7 @@ void ATankPlayerController::AimTowardsCrossHair()
 	
 	if (GetSightRayHitLocation(OutHitLocation))
 	{
-		//UE_LOG(LogTemp, Warning, TEXT("HitLocation: %s"), *OutHitLocation.ToString());
+		UE_LOG(LogTemp, Warning, TEXT("HitLocation: %s"), *OutHitLocation.ToString());
 	}
 }
 
@@ -50,14 +50,14 @@ bool ATankPlayerController::GetSightRayHitLocation(FVector &OutHitLocation) cons
 {
 	int32 ViewPortX, ViewPortY;
 	GetViewportSize(ViewPortX, ViewPortY);
-	FVector WorldRotation;
+	FVector LookDirection;
 	auto ScreenLocation = FVector2D(ViewPortX * CrossHairLocationX, ViewPortY*CrossHairLocationY);
-	if (GetPlayerRotation(ScreenLocation, WorldRotation))
+	if (GetPlayerRotation(ScreenLocation, LookDirection))
 	{
-		UE_LOG(LogTemp, Warning, TEXT("Look Direction(vector) : %s"), *WorldRotation.ToString())
+		GetLookVectorHitLocation(LookDirection, OutHitLocation);
+		
+		//UE_LOG(LogTemp, Warning, TEXT("Look Direction(vector) : %s"), *WorldRotation.ToString())
 	}
-	
-		OutHitLocation = FVector(0.0);
 	return true;
 
 }
@@ -66,4 +66,19 @@ bool ATankPlayerController::GetPlayerRotation(FVector2D ScreenLocation, FVector 
 {
 	FVector WorldLocation = FVector(1.0);
 	return DeprojectScreenPositionToWorld(ScreenLocation.X, ScreenLocation.Y, WorldLocation, WorldRotation);
+}
+
+bool ATankPlayerController::GetLookVectorHitLocation(FVector LookDirection, FVector &OutHitLocation) const
+{
+	FHitResult HitResult;
+	auto StartLocation = PlayerCameraManager->GetCameraLocation();
+	auto RayEnd = StartLocation + (LookDirection * RaySize);
+	if (GetWorld()->LineTraceSingleByChannel(HitResult, StartLocation, RayEnd, ECollisionChannel::ECC_Visibility))
+	{
+		OutHitLocation = HitResult.Location;
+		return true;
+	}
+	OutHitLocation = FVector(0.0f);
+	return false;
+	
 }
