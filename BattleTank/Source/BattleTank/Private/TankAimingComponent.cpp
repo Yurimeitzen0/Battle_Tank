@@ -1,6 +1,7 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 #include "BattleTank.h"
+#include "TankBarrel.h"
 #include "TankAimingComponent.h"
 
 
@@ -15,28 +16,12 @@ UTankAimingComponent::UTankAimingComponent()
 }
 
 
-// Called when the game starts
-void UTankAimingComponent::BeginPlay()
-{
-	Super::BeginPlay();
 
-	// ...
-	
-}
-
-
-void UTankAimingComponent::SetBarrelReference(UStaticMeshComponent * BarrelToSet)
+void UTankAimingComponent::SetBarrelReference(UTankBarrel * BarrelToSet)
 {
 	Barrel = BarrelToSet;
 }
 
-// Called every frame
-void UTankAimingComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction)
-{
-	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
-
-	// ...
-}
 
 void UTankAimingComponent::AimAt(FVector TargetLocation,float LaunchSpeed)
 {
@@ -50,13 +35,21 @@ void UTankAimingComponent::AimAt(FVector TargetLocation,float LaunchSpeed)
 	}
 	FVector OutLaunchVelocity;
 	FVector StartLocation = Barrel->GetSocketLocation(FName("BarrelEnd"));
-	if (UGameplayStatics::SuggestProjectileVelocity(this, OutLaunchVelocity, StartLocation,TargetLocation, LaunchSpeed, false, (0.0f), (0.0f), ESuggestProjVelocityTraceOption::TraceFullPath))
+	bool bHaveAimSolution = UGameplayStatics::SuggestProjectileVelocity(this, OutLaunchVelocity, StartLocation, TargetLocation, LaunchSpeed, false, (0.0f), (0.0f), ESuggestProjVelocityTraceOption::TraceFullPath);
+	
+	if (bHaveAimSolution)
 	{
 		auto TankName = GetOwner()->GetName();
 		auto AimDirection = OutLaunchVelocity.GetSafeNormal();
-		UE_LOG(LogTemp, Warning, TEXT("%s aiming At: %s"), *TankName, *AimDirection.ToString());
+		
+		MoveBarrelTowards(AimDirection);
 	}
 	
 
+}
+
+void UTankAimingComponent::MoveBarrelTowards(FVector AimDirection)
+{
+	Barrel->Elevate(5);
 }
 
