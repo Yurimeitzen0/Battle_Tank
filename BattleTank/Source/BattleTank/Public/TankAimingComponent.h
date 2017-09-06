@@ -17,7 +17,7 @@ public:
 	UTankAimingComponent();
 	void SetBarrelReference(UStaticMeshComponent* BarrelToSet);
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
-	void AimAt(FVector TargetLocation);
+	void AimAt(FVector TargetLocation, float LaunchSpeed);
 protected:
 	// Called when the game starts
 	virtual void BeginPlay() override;
