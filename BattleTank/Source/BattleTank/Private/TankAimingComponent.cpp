@@ -55,15 +55,7 @@ void UTankAimingComponent::AimAt(FVector TargetLocation,float LaunchSpeed)
 		auto AimDirection = OutLaunchVelocity.GetSafeNormal();
 		MoveBarrelTowards(AimDirection);
 		MoveTurretTowards(AimDirection);
-
-		auto Time = GetWorld()->GetTimeSeconds();
-		UE_LOG(LogTemp, Warning, TEXT("%f Barrel found elevating at: "), Time);
-		
-	}
-	else
-	{
-		auto Time = GetWorld()->GetTimeSeconds();
-		UE_LOG(LogTemp, Warning, TEXT("%f Barrel not found elevating at:"),Time);
+	
 	}
 	
 

@@ -20,6 +20,9 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "Setup")
 	void SetTurretReference(UTankTurret* TurretToSet);
 	void AimAt(FVector HitLocation);
+
+	UFUNCTION(BlueprintCallable, Category = "Setup")
+	void Fire();
 	
 
 protected:
