@@ -22,11 +22,11 @@ public:
 	void BeginPlay() override;
 	virtual void Tick(float DeltaSeconds) override;
 private:
-	UPROPERTY(EditAnywhere)
+	UPROPERTY(EditDefaultsOnly)
 	float CrossHairLocationX = 0.5f;
-	UPROPERTY(EditAnywhere)
+	UPROPERTY(EditDefaultsOnly)
 	float CrossHairLocationY = 0.3333f;
-	UPROPERTY(EditAnywhere)
+	UPROPERTY(EditDefaultsOnly)
 	float RaySize = 10000000.0f;
 	void ATankPlayerController::AimTowardsCrossHair();
 	bool GetSightRayHitLocation(FVector &OutHitLocation) const;
