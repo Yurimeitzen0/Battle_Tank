@@ -8,25 +8,30 @@
 
 void UTankMovementComponent::Initialise(UTankTrack* LeftTrackToSet, UTankTrack* RightTrackToSet)
 {
-	if (!LeftTrackToSet || !RightTrackToSet)
-	{
-		return;
-	}
-	else
-	{
 		LeftTrack = LeftTrackToSet;
 		RightTrack = RightTrackToSet;
-	}
 	
 }
 
 
 void UTankMovementComponent::IntendMoveForward(float Throw)
 {
-	auto name = GetName();
-	UE_LOG(LogTemp, Warning, TEXT("%s speed: %f"), *name, Throw);
-
+	
+	if (!LeftTrack || !RightTrack){return;}
 	LeftTrack->SetThrottle(Throw);
 	RightTrack->SetThrottle(Throw);
 	//TODO fix/prevent double force
 }
+
+void UTankMovementComponent::IntendToTurn(float Throw)
+{
+	/*
+	auto name = GetName();
+	UE_LOG(LogTemp, Warning, TEXT("%s speed: %f"), *name, Throw);
+	*/
+	if (!LeftTrack || !RightTrack){return;}
+	LeftTrack->SetThrottle(Throw);
+	RightTrack->SetThrottle(-Throw);
+	//TODO fix/prevent double force
+}
+
