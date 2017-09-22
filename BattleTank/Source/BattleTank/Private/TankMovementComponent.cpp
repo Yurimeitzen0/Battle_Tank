@@ -1,4 +1,4 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+// Frigid Coffin Ltd.
 
 #include "BattleTank.h"
 #include "TankTrack.h"
@@ -13,6 +13,18 @@ void UTankMovementComponent::Initialise(UTankTrack* LeftTrackToSet, UTankTrack* 
 	
 }
 
+
+void UTankMovementComponent::RequestDirectMove(const FVector& MoveVelocity, bool bForceMaxSpeed)
+{
+	auto TankFoward = GetOwner()->GetActorForwardVector().GetSafeNormal();
+	auto AIFowardVector = MoveVelocity.GetSafeNormal();
+	auto FowardThrow = FVector::DotProduct(TankFoward, AIFowardVector);
+	auto TurnThrow = FVector::CrossProduct(TankFoward, AIFowardVector);
+
+	IntendMoveForward(FowardThrow);
+	IntendToTurn(TurnThrow.Z);
+	//UE_LOG(LogTemp,Warning,TEXT("%s Vectoring to %s"),*TankName,*AIFowardVector)
+}
 
 void UTankMovementComponent::IntendMoveForward(float Throw)
 {
