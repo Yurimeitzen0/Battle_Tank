@@ -18,17 +18,11 @@ void ATankPlayerController::BeginPlay()
 	// auto ControlledTank = GetControlledTank();
 	//UE_LOG(LogTemp, Warning, TEXT("PlayerController set"));
 	
-	if (GetControlledTank())
-	{
-		UE_LOG(LogTemp, Warning, TEXT("Got Controlled Tank: %s"), *GetControlledTank()->GetName());
-	}
-	else
-	{
-		UE_LOG(LogTemp, Error, TEXT("Failed to get the controlled tank"));
-	}
+	if (!ensure(GetControlledTank())){return;}
+	
 
 	auto AimingComponent = GetControlledTank()->FindComponentByClass<UTankAimingComponent>();
-	if (AimingComponent)
+	if (ensure(AimingComponent))
 	{
 		FoundAimingComponent(AimingComponent);
 	}
@@ -48,10 +42,7 @@ void ATankPlayerController::Tick(float DeltaTime)
 
 void ATankPlayerController::AimTowardsCrossHair()
 {
-	if (!GetControlledTank())
-	{
-		return;
-	}
+	if (!ensure(GetControlledTank())){return;}
 	FVector OutHitLocation;
 	
 	if (GetSightRayHitLocation(OutHitLocation))

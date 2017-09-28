@@ -29,7 +29,7 @@ void UTankMovementComponent::RequestDirectMove(const FVector& MoveVelocity, bool
 void UTankMovementComponent::IntendMoveForward(float Throw)
 {
 	
-	if (!LeftTrack || !RightTrack){return;}
+	if (!ensure(LeftTrack && RightTrack)){return;}
 	LeftTrack->SetThrottle(Throw);
 	RightTrack->SetThrottle(Throw);
 	//TODO fix/prevent double force
@@ -41,7 +41,7 @@ void UTankMovementComponent::IntendToTurn(float Throw)
 	auto name = GetName();
 	UE_LOG(LogTemp, Warning, TEXT("%s speed: %f"), *name, Throw);
 	*/
-	if (!LeftTrack || !RightTrack){return;}
+	if (!ensure(LeftTrack && RightTrack)) { return; }
 	LeftTrack->SetThrottle(Throw);
 	RightTrack->SetThrottle(-Throw);
 	//TODO fix/prevent double force
