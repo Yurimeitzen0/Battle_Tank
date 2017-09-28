@@ -1,8 +1,6 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 #include "BattleTank.h"
-#include "TankAimingComponent.h"
-#include "TankMovementComponent.h"
 #include "Projectile.h"
 #include "TankBarrel.h"
 #include "Tank.h"
@@ -16,15 +14,9 @@ ATank::ATank()
 	PrimaryActorTick.bCanEverTick = false;
 }
 
-
-
-
-
-void ATank::AimAt(FVector HitLocation)
+void ATank::BeginPlay()
 {
-	if (!ensure(TankAimingComponent)) { return; }
-	//TankAimingComponent->AimAt(HitLocation, LaunchSpeed);
-	
+	Super::BeginPlay();
 }
 
 void ATank::Fire()

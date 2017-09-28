@@ -29,7 +29,7 @@ public:
 	UFUNCTION(BluePrintCallable, Category = "Setup")
 	void Initialise(UTankTurret * TurretToSet, UTankBarrel * BarrelToSet);
 	
-	void AimAt(FVector TargetLocation, float LaunchSpeed);
+	void AimAt(FVector TargetLocation);
 	
 protected:
 	
@@ -39,7 +39,13 @@ protected:
 private:
 	UTankBarrel* Barrel = nullptr;
 	UTankTurret* Turret = nullptr;
+	
+	UPROPERTY(EditDefaultsOnly, Category = "Firing")
+	float LaunchSpeed = 100000;
+
 	void MoveBarrelTowards(FVector AimDirection);
 	void MoveTurretTowards(FVector AimDirection);
+
+	
 	
 };
