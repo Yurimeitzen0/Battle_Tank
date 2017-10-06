@@ -23,7 +23,7 @@ void UTankMovementComponent::RequestDirectMove(const FVector& MoveVelocity, bool
 
 	IntendMoveForward(FowardThrow);
 	IntendToTurn(TurnThrow.Z);
-	//UE_LOG(LogTemp,Warning,TEXT("%s Vectoring to %s"),*TankName,*AIFowardVector)
+	
 }
 
 void UTankMovementComponent::IntendMoveForward(float Throw)
@@ -39,7 +39,7 @@ void UTankMovementComponent::IntendToTurn(float Throw)
 {
 	/*
 	auto name = GetName();
-	UE_LOG(LogTemp, Warning, TEXT("%s speed: %f"), *name, Throw);
+	
 	*/
 	if (!ensure(LeftTrack && RightTrack)) { return; }
 	LeftTrack->SetThrottle(Throw);

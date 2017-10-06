@@ -9,9 +9,9 @@ void ATankAiController::Tick(float DeltaSeconds)
 {
 	Super::Tick(DeltaSeconds);
 	auto AiTank = (GetPawn());
+	if (!ensure(AiTank)) { return; }
 	auto PlayerTank = (GetWorld()->GetFirstPlayerController()->GetPawn());
-	
-	if (!ensure(PlayerTank && AiTank))	{return;}
+	if (!ensure(PlayerTank ))	{return;}
 
 	MoveToActor(PlayerTank, AcceptanceRadius);
 	auto AimingComponent = AiTank->FindComponentByClass<UTankAimingComponent>();
