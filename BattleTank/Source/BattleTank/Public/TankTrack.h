@@ -16,9 +16,7 @@ class BATTLETANK_API UTankTrack : public UStaticMeshComponent
 	
 	
 public:
-	UTankTrack();
-
-	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction * ThisTickFunction) override;
+	
 	UFUNCTION(BlueprintCallable, Category = "Input")
 	void SetThrottle(float Throttle);
 	//Max Force per track in Newtons
@@ -26,4 +24,13 @@ public:
 	float TrackMaxDrivingForce = 400000;
 	UPROPERTY(EditDefaultsOnly, Category = "Physics")
 	float InitialT = 0.5f;
+
+private:
+	UTankTrack();
+	virtual void BeginPlay() override;
+	void ApplySidewaysForce();
+	UFUNCTION(BlueprintCallable, Category = "Setup")
+	void OnHit(UPrimitiveComponent* HitComponent, AActor* OtherActor, UPrimitiveComponent* OtherComponent, FVector NormalImpulse, const FHitResult& Hit);
+	void DriveTrack();
+	float CurrentThrottle = 0;
 };
