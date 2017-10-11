@@ -49,7 +49,7 @@ void UTankAimingComponent::TickComponent(float DeltaTime, enum ELevelTick TickTy
 	UE_LOG(LogTemp, Warning, TEXT("%d Ammo left"), AmmoCount);
 }
 
-int UTankAimingComponent::GetAmmo() const
+int32 UTankAimingComponent::GetAmmo() const
 {
 	return AmmoCount;
 }
