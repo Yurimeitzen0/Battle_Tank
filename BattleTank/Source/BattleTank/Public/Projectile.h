@@ -24,11 +24,15 @@ public:
 	
 	
 	void LaunchProjectile(float LaunchSpeed);
-	
+	UPROPERTY(VisibleAnywhere, Category = "Component")
+		URadialForceComponent* ExplosionForce = nullptr;
+
 private:
 	
 	UFUNCTION(BlueprintCallable, Category = "Setup")
 	void OnHit(UPrimitiveComponent* HitComponent, AActor* OtherActor, UPrimitiveComponent* OtherComponent, FVector NormalImpulse, const FHitResult& Hit);
+
+	void OnTimerExpire();
 
 	UPROPERTY(VisibleAnywhere, Category = "Component")
 	UProjectileMovementComponent* ProjectileMovementComponent = nullptr;
@@ -42,6 +46,9 @@ private:
 	UPROPERTY(VisibleAnywhere, Category = "Component")
 	UParticleSystemComponent* ImpactBlast = nullptr;
 	
-	UPROPERTY(VisibleAnywhere, Category = "Component")
-	URadialForceComponent* ExplosionForce = nullptr;
+	
+	UPROPERTY(EditDefaultsOnly,Category = "Setup")
+	float DestroyDelay = 10.0f;
+	FTimerHandle TimerHandle;
+	
 };
