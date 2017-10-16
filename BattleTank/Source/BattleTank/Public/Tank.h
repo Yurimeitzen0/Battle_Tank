@@ -11,16 +11,19 @@ class BATTLETANK_API ATank : public APawn
 {
 	GENERATED_BODY()
 public:
-		// Sets default values for this pawn's properties
-		ATank();
+		
+	UFUNCTION(BlueprintPure,Category = "Health")
+	float GetHealthPercent() const;
 
-		//AProjectile* ProjectileHit = nullptr;
-		virtual float TakeDamage(float DamageAmount, struct FDamageEvent const & DamageEvent, class AController * EventInstigator, AActor * DamageCauser);
+	virtual float TakeDamage(float DamageAmount, struct FDamageEvent const & DamageEvent, class AController * EventInstigator, AActor * DamageCauser);
 private:
+
+	ATank();
 
 	UPROPERTY(EditDefaultsOnly, Category = "Setup")
 	int32 MaxHealth = 200;
 
 	UPROPERTY(VisibleAnywhere, Category = "Setup")
 	int32 CurrentHealth = MaxHealth;
+
 };

@@ -48,7 +48,7 @@ private:
 	
 	UPROPERTY(VisibleAnywhere, Category = "Setup")
 	float DamageAmount = 20;
-	
+
 	UPROPERTY(EditDefaultsOnly,Category = "Setup")
 	float DestroyDelay = 10.0f;
 	FTimerHandle TimerHandle;
