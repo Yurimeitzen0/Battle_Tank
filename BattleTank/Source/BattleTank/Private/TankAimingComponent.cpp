@@ -46,7 +46,6 @@ void UTankAimingComponent::TickComponent(float DeltaTime, enum ELevelTick TickTy
 	{
 		FiringState = EFiringState::Locked;
 	}
-	UE_LOG(LogTemp, Warning, TEXT("%d Ammo left"), AmmoCount);
 }
 
 int32 UTankAimingComponent::GetAmmo() const

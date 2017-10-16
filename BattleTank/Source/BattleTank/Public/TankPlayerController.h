@@ -24,14 +24,22 @@ protected:
 private:
 	void BeginPlay() override;
 	virtual void Tick(float DeltaSeconds) override;
+	virtual void SetPawn(APawn* InPawn) override;
+	UFUNCTION()
+	void OnPlayerDeath();
+
 	UPROPERTY(EditDefaultsOnly)
 	float CrossHairLocationX = 0.5f;
+	
 	UPROPERTY(EditDefaultsOnly)
 	float CrossHairLocationY = 0.3333f;
+	
 	UPROPERTY(EditDefaultsOnly)
 	float RaySize = 10000000.0f;
+	
 	void ATankPlayerController::AimTowardsCrossHair();
 	bool GetSightRayHitLocation(FVector &OutHitLocation) const;
 	bool GetPlayerRotation(FVector2D, FVector &) const;
 	bool GetLookVectorHitLocation(FVector LookDirection,FVector &OutHitLocation) const;
+
 };

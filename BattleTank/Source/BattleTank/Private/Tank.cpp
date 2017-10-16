@@ -4,6 +4,12 @@
 #include "Tank.h"
 
 
+void ATank::BeginPlay()
+{
+	Super::BeginPlay();
+	CurrentHealth = MaxHealth;
+}
+
 // Sets default values
 ATank::ATank()
 {
@@ -18,7 +24,9 @@ float ATank::TakeDamage(float DamageAmount, FDamageEvent const & DamageEvent, AC
 	CurrentHealth -= DamageToApply;
 	if (CurrentHealth<=0)
 	{
-		Destroy();
+		OnDeath.Broadcast();
+		//Destroy();
+		
 	}
 	return DamageToApply;
 }
